@@ -90,11 +90,14 @@ button {
 .page-shell {
   position: relative;
   overflow-x: clip;
+  padding-top: calc(var(--header-height) + 4px);
 }
 
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 40;
   padding: 3px 6px 0;
 }
@@ -4230,6 +4233,10 @@ html {
 }
 
 @media (max-width: 720px) {
+  .hero__proof {
+    display: none;
+  }
+
   .programs__aside {
     display: grid;
     gap: 14px;
@@ -4482,12 +4489,18 @@ html {
     font-size: 0.93rem;
   }
 
+  .hero .microcopy,
+  .hero__proof,
+  .hero__visual-note {
+    display: none;
+  }
+
   .hero__proof div {
     padding-right: 0;
   }
 
   .hero__visual {
-    min-height: 360px;
+    min-height: 300px;
   }
 
   .teacher__media {

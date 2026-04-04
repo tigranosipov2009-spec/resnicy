@@ -4595,3 +4595,90 @@ html {
     min-height: 210px;
   }
 }
+
+/* Final gallery tuning */
+.results__slider.results__grid {
+  --results-edge-pad: clamp(18px, 3vw, 34px);
+  gap: clamp(12px, 1.5vw, 18px);
+  padding: 6px var(--results-edge-pad) 14px;
+  scroll-padding-inline: calc(var(--results-edge-pad) + 4px);
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+}
+
+.results__slider.results__grid .result-card,
+.results__slider.results__grid .result-card--large,
+.results__slider.results__grid .result-card--wide,
+.results__slider.results__grid .result-card--student-work {
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+}
+
+.results__slider.results__grid .result-card {
+  flex-basis: min(26vw, 312px);
+}
+
+.results__slider.results__grid .result-card--large {
+  flex-basis: min(37vw, 472px);
+}
+
+.results__slider.results__grid .result-card--wide {
+  flex-basis: min(35vw, 428px);
+}
+
+.results__slider.results__grid .result-card--student-work {
+  flex-basis: min(22vw, 292px);
+}
+
+@media (max-width: 1100px) {
+  .results__slider.results__grid {
+    --results-edge-pad: 22px;
+  }
+
+  .results__slider.results__grid .result-card {
+    flex-basis: min(34vw, 300px);
+  }
+
+  .results__slider.results__grid .result-card--large,
+  .results__slider.results__grid .result-card--wide {
+    flex-basis: min(48vw, 404px);
+  }
+
+  .results__slider.results__grid .result-card--student-work {
+    flex-basis: min(30vw, 300px);
+  }
+}
+
+@media (max-width: 900px) {
+  .results__slider.results__grid {
+    --results-edge-pad: 20px;
+    gap: 12px;
+  }
+
+  .results__slider.results__grid .result-card {
+    flex-basis: min(60vw, 286px);
+  }
+
+  .results__slider.results__grid .result-card--large,
+  .results__slider.results__grid .result-card--wide {
+    flex-basis: min(70vw, 340px);
+  }
+
+  .results__slider.results__grid .result-card--student-work {
+    flex-basis: min(64vw, 292px);
+  }
+}
+
+@media (max-width: 540px) {
+  .results__slider.results__grid {
+    --results-edge-pad: 16px;
+    gap: 10px;
+  }
+
+  .results__slider.results__grid .result-card,
+  .results__slider.results__grid .result-card--large,
+  .results__slider.results__grid .result-card--wide,
+  .results__slider.results__grid .result-card--student-work {
+    flex-basis: calc(100vw - 92px);
+  }
+}

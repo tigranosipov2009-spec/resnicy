@@ -202,12 +202,20 @@ resultsSliders.forEach((slider) => {
   let isDragging = false;
   let startX = 0;
   let startScrollLeft = 0;
+  let dragMoved = false;
 
   if (!cards.length) {
     return;
   }
 
-  const getOffsets = () => cards.map((card) => card.offsetLeft);
+  const getSnapPositions = () => {
+    const maxScroll = Math.max(0, slider.scrollWidth - slider.clientWidth);
+
+    return cards.map((card) => {
+      const centeredOffset = card.offsetLeft - (slider.clientWidth - card.clientWidth) / 2;
+      return Math.min(maxScroll, Math.max(0, Math.round(centeredOffset)));
+    });
+  };
 
   const syncResultsNav = () => {
     const current = slider.scrollLeft;
@@ -222,8 +230,23 @@ resultsSliders.forEach((slider) => {
     }
   };
 
+  const snapToClosestCard = (behavior = "smooth") => {
+    const positions = getSnapPositions();
+    const current = slider.scrollLeft;
+
+    if (!positions.length) {
+      return;
+    }
+
+    const target = positions.reduce((closest, position) =>
+      Math.abs(position - current) < Math.abs(closest - current) ? position : closest
+    , positions[0]);
+
+    slider.scrollTo({ left: target, behavior });
+  };
+
   const moveResultsSlider = (direction) => {
-    const offsets = getOffsets();
+    const offsets = getSnapPositions();
     const current = slider.scrollLeft;
 
     if (!offsets.length) {
@@ -266,6 +289,7 @@ resultsSliders.forEach((slider) => {
     }
 
     isDragging = true;
+    dragMoved = false;
     startX = event.clientX;
     startScrollLeft = slider.scrollLeft;
     slider.classList.add("is-dragging");
@@ -277,7 +301,8 @@ resultsSliders.forEach((slider) => {
     }
 
     const deltaX = event.clientX - startX;
-    slider.scrollLeft = startScrollLeft - deltaX;
+    dragMoved = dragMoved || Math.abs(deltaX) > 4;
+    slider.scrollLeft = startScrollLeft - deltaX * 1.12;
     event.preventDefault();
   });
 
@@ -288,6 +313,9 @@ resultsSliders.forEach((slider) => {
 
     isDragging = false;
     slider.classList.remove("is-dragging");
+    if (dragMoved) {
+      snapToClosestCard();
+    }
     syncResultsNav();
   };
 

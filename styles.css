@@ -4611,7 +4611,7 @@ html {
 .results__slider.results__grid .result-card--wide,
 .results__slider.results__grid .result-card--student-work {
   scroll-snap-align: center;
-  scroll-snap-stop: always;
+  scroll-snap-stop: normal;
 }
 
 .results__slider.results__grid .result-card {

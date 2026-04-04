@@ -203,6 +203,7 @@ resultsSliders.forEach((slider) => {
   let startX = 0;
   let startScrollLeft = 0;
   let dragMoved = false;
+  let snapTimer = null;
 
   if (!cards.length) {
     return;
@@ -243,6 +244,15 @@ resultsSliders.forEach((slider) => {
     , positions[0]);
 
     slider.scrollTo({ left: target, behavior });
+  };
+
+  const queueSnapToClosestCard = (delay = 150) => {
+    window.clearTimeout(snapTimer);
+    snapTimer = window.setTimeout(() => {
+      if (!isDragging) {
+        snapToClosestCard();
+      }
+    }, delay);
   };
 
   const moveResultsSlider = (direction) => {
@@ -288,6 +298,7 @@ resultsSliders.forEach((slider) => {
       return;
     }
 
+    window.clearTimeout(snapTimer);
     isDragging = true;
     dragMoved = false;
     startX = event.clientX;
@@ -302,7 +313,7 @@ resultsSliders.forEach((slider) => {
 
     const deltaX = event.clientX - startX;
     dragMoved = dragMoved || Math.abs(deltaX) > 4;
-    slider.scrollLeft = startScrollLeft - deltaX * 1.12;
+    slider.scrollLeft = startScrollLeft - deltaX * 0.92;
     event.preventDefault();
   });
 
@@ -314,16 +325,30 @@ resultsSliders.forEach((slider) => {
     isDragging = false;
     slider.classList.remove("is-dragging");
     if (dragMoved) {
-      snapToClosestCard();
+      queueSnapToClosestCard(70);
     }
     syncResultsNav();
   };
 
   window.addEventListener("mouseup", stopResultsDrag);
-  slider.addEventListener("mouseleave", stopResultsDrag);
   slider.addEventListener("dragstart", (event) => event.preventDefault());
+  slider.addEventListener("wheel", (event) => {
+    if (Math.abs(event.deltaY) <= Math.abs(event.deltaX) || Math.abs(event.deltaY) < 3) {
+      return;
+    }
 
-  slider.addEventListener("scroll", syncResultsNav, { passive: true });
+    slider.scrollLeft += event.deltaY * 0.9;
+    queueSnapToClosestCard(170);
+    event.preventDefault();
+  }, { passive: false });
+
+  slider.addEventListener("scroll", () => {
+    syncResultsNav();
+
+    if (!isDragging) {
+      queueSnapToClosestCard(170);
+    }
+  }, { passive: true });
   window.addEventListener("resize", syncResultsNav);
   syncResultsNav();
 });

@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const contactForms = document.querySelectorAll(".contact-form");
   const linkedCards = document.querySelectorAll("[data-card-href]");
   const resultsSliders = document.querySelectorAll("[data-results-slider]");
+  const yandexMapContainer = document.querySelector("[data-yandex-map]");
   const supportsHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
   const TELEGRAM_BOT_TOKEN = "8621776447:AAF-yqZTlzfjJpGUExIuxa7hNH8hiGxrvPI";
@@ -476,7 +477,63 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  safeRun("yandex-map", () => {
+    if (!yandexMapContainer || typeof window.ymaps3 === "undefined") {
+      return;
+    }
+
+    const latitude = Number(yandexMapContainer.getAttribute("data-map-lat"));
+    const longitude = Number(yandexMapContainer.getAttribute("data-map-lng"));
+    const mapTitle = yandexMapContainer.getAttribute("data-map-title") || "Love.Lashes";
+    const mapAddress = yandexMapContainer.getAttribute("data-map-address") || "ул. Первомайская, 4А, Симферополь";
+
+    if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) {
+      return;
+    }
+
+    const initYandexMap = async () => {
+      try {
+        await window.ymaps3.ready;
+
+        const { YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer, YMapMarker } = window.ymaps3;
+        const coordinates = [longitude, latitude];
+        const markerElement = document.createElement("div");
+
+        markerElement.className = "contact-map__marker";
+        markerElement.setAttribute("aria-hidden", "true");
+        markerElement.title = `${mapTitle}, ${mapAddress}`;
+
+        const map = new YMap(yandexMapContainer, {
+          location: {
+            center: coordinates,
+            zoom: 16,
+          },
+        });
+
+        yandexMapContainer.setAttribute("aria-label", `Карта: ${mapTitle}, ${mapAddress}`);
+
+        map.addChild(new YMapDefaultSchemeLayer({}));
+        map.addChild(new YMapDefaultFeaturesLayer({}));
+        map.addChild(new YMapMarker({ coordinates }, markerElement));
+
+        yandexMapContainer._yandexMap = map;
+      } catch (_) {
+        yandexMapContainer.innerHTML = "";
+      }
+    };
+
+    void initYandexMap();
+  });
+
   safeRun("telegram-forms", () => {
+    const PHONE_INVALID_MESSAGE = "\u041f\u043e\u0436\u0430\u043b\u0443\u0439\u0441\u0442\u0430, \u0432\u0432\u0435\u0434\u0438\u0442\u0435 \u043d\u043e\u043c\u0435\u0440 \u0442\u0435\u043b\u0435\u0444\u043e\u043d\u0430 \u0432 \u043a\u043e\u0440\u0440\u0435\u043a\u0442\u043d\u043e\u043c \u0444\u043e\u0440\u043c\u0430\u0442\u0435";
+    const SUCCESS_MESSAGE =
+      "\u0421\u043f\u0430\u0441\u0438\u0431\u043e! \u0417\u0430\u044f\u0432\u043a\u0430 \u043e\u0442\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0430, \u043c\u044b \u0441\u043a\u043e\u0440\u043e \u0441\u0432\u044f\u0436\u0435\u043c\u0441\u044f \u0441 \u0432\u0430\u043c\u0438.";
+    const ERROR_MESSAGE =
+      "\u041d\u0435 \u0443\u0434\u0430\u043b\u043e\u0441\u044c \u043e\u0442\u043f\u0440\u0430\u0432\u0438\u0442\u044c \u0437\u0430\u044f\u0432\u043a\u0443. \u041f\u043e\u043f\u0440\u043e\u0431\u0443\u0439\u0442\u0435 \u0435\u0449\u0435 \u0440\u0430\u0437 \u0438\u043b\u0438 \u0441\u0432\u044f\u0436\u0438\u0442\u0435\u0441\u044c \u0441 \u043d\u0430\u043c\u0438 \u043f\u043e \u0442\u0435\u043b\u0435\u0444\u043e\u043d\u0443.";
+    const NOT_CONFIGURED_MESSAGE =
+      "\u0424\u043e\u0440\u043c\u0430 \u0435\u0449\u0435 \u043d\u0435 \u043d\u0430\u0441\u0442\u0440\u043e\u0435\u043d\u0430. \u0423\u043a\u0430\u0436\u0438\u0442\u0435 TELEGRAM_BOT_TOKEN \u0438 TELEGRAM_CHAT_ID \u0432 script.js.";
+
     const formatLeadDateTime = () =>
       new Intl.DateTimeFormat("ru-RU", {
         day: "2-digit",
@@ -511,6 +568,104 @@ document.addEventListener("DOMContentLoaded", () => {
       return lines.join("\n");
     };
 
+    const setFormMessage = (response, type, message) => {
+      if (!response) {
+        return;
+      }
+
+      response.textContent = message;
+      response.classList.remove("form-response--visible", "form-response--success", "form-response--error");
+
+      if (!message) {
+        return;
+      }
+
+      response.classList.add("form-response--visible");
+      response.classList.add(type === "success" ? "form-response--success" : "form-response--error");
+    };
+
+    const clearFieldError = (field) => {
+      if (!(field instanceof HTMLInputElement || field instanceof HTMLSelectElement || field instanceof HTMLTextAreaElement)) {
+        return;
+      }
+
+      field.classList.remove("is-invalid");
+      field.removeAttribute("aria-invalid");
+      field.setCustomValidity("");
+    };
+
+    const setFieldError = (field, message) => {
+      if (!(field instanceof HTMLInputElement || field instanceof HTMLSelectElement || field instanceof HTMLTextAreaElement)) {
+        return;
+      }
+
+      field.classList.add("is-invalid");
+      field.setAttribute("aria-invalid", "true");
+      field.setCustomValidity(message);
+    };
+
+    const getPhoneDigits = (value) => String(value || "").replace(/\D+/g, "");
+
+    const alignRussianPhoneDigits = (value) => {
+      let digits = getPhoneDigits(value);
+
+      if (!digits) {
+        return "";
+      }
+
+      if (digits.startsWith("8")) {
+        digits = `7${digits.slice(1)}`;
+      } else if (digits.startsWith("9")) {
+        digits = `7${digits}`;
+      }
+
+      return digits.slice(0, 11);
+    };
+
+    const formatPhoneValue = (value) => {
+      const digits = alignRussianPhoneDigits(value);
+
+      if (!digits || !digits.startsWith("7")) {
+        return String(value || "").replace(/[^\d+]/g, "").slice(0, 16);
+      }
+
+      const body = digits.slice(1);
+      let formatted = "+7";
+
+      if (body.length > 0) {
+        formatted += ` (${body.slice(0, Math.min(3, body.length))}`;
+      }
+
+      if (body.length >= 3) {
+        formatted += ")";
+      }
+
+      if (body.length > 3) {
+        formatted += ` ${body.slice(3, Math.min(6, body.length))}`;
+      }
+
+      if (body.length > 6) {
+        formatted += `-${body.slice(6, Math.min(8, body.length))}`;
+      }
+
+      if (body.length > 8) {
+        formatted += `-${body.slice(8, Math.min(10, body.length))}`;
+      }
+
+      return formatted;
+    };
+
+    const normalizePhone = (value) => {
+      const digits = alignRussianPhoneDigits(value);
+      const isValid = digits.length === 11 && digits.startsWith("7");
+
+      return {
+        digits,
+        isValid,
+        formatted: isValid ? formatPhoneValue(digits) : String(value || "").trim(),
+      };
+    };
+
     const sendLeadToTelegram = async (message) => {
       if (
         !TELEGRAM_BOT_TOKEN ||
@@ -521,16 +676,26 @@ document.addEventListener("DOMContentLoaded", () => {
         throw new Error("TELEGRAM_NOT_CONFIGURED");
       }
 
-      const telegramResponse = await fetch(TELEGRAM_API_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          chat_id: TELEGRAM_CHAT_ID,
-          text: message,
-        }),
-      });
+      const controller = new AbortController();
+      const timeoutId = window.setTimeout(() => controller.abort(), 15000);
+      let telegramResponse;
+
+      try {
+        telegramResponse = await fetch(TELEGRAM_API_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          cache: "no-store",
+          signal: controller.signal,
+          body: JSON.stringify({
+            chat_id: TELEGRAM_CHAT_ID,
+            text: message,
+          }),
+        });
+      } finally {
+        window.clearTimeout(timeoutId);
+      }
 
       if (!telegramResponse.ok) {
         throw new Error(`TELEGRAM_HTTP_${telegramResponse.status}`);
@@ -544,8 +709,61 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     contactForms.forEach((form) => {
+      if (form.dataset.submitBound === "true") {
+        return;
+      }
+
+      form.dataset.submitBound = "true";
+
       const response = form.querySelector(".form-response");
       const submitButton = form.querySelector('button[type="submit"]');
+      const phoneInput = form.querySelector('input[name="phone"]');
+
+      if (phoneInput instanceof HTMLInputElement) {
+        phoneInput.setAttribute("maxlength", "18");
+        phoneInput.setAttribute("enterkeyhint", "done");
+
+        phoneInput.addEventListener("input", () => {
+          clearFieldError(phoneInput);
+          setFormMessage(response, "error", "");
+
+          const formattedValue = formatPhoneValue(phoneInput.value);
+
+          if (formattedValue !== phoneInput.value) {
+            phoneInput.value = formattedValue;
+          }
+        });
+
+        phoneInput.addEventListener("blur", () => {
+          const normalizedPhone = normalizePhone(phoneInput.value);
+
+          clearFieldError(phoneInput);
+
+          if (!phoneInput.value.trim()) {
+            return;
+          }
+
+          if (!normalizedPhone.isValid) {
+            setFieldError(phoneInput, PHONE_INVALID_MESSAGE);
+            return;
+          }
+
+          phoneInput.value = normalizedPhone.formatted;
+        });
+
+        phoneInput.addEventListener("invalid", () => {
+          if (!phoneInput.value.trim()) {
+            clearFieldError(phoneInput);
+            return;
+          }
+
+          const normalizedPhone = normalizePhone(phoneInput.value);
+
+          if (!normalizedPhone.isValid) {
+            setFieldError(phoneInput, PHONE_INVALID_MESSAGE);
+          }
+        });
+      }
 
       form.addEventListener("submit", async (event) => {
         event.preventDefault();
@@ -554,33 +772,67 @@ document.addEventListener("DOMContentLoaded", () => {
           return;
         }
 
+        if (form.dataset.submitting === "true") {
+          return;
+        }
+
+        if (phoneInput instanceof HTMLInputElement) {
+          clearFieldError(phoneInput);
+
+          if (!phoneInput.value.trim()) {
+            if (!form.reportValidity()) {
+              return;
+            }
+          }
+
+          const normalizedPhone = normalizePhone(phoneInput.value);
+
+          if (!normalizedPhone.isValid) {
+            setFieldError(phoneInput, PHONE_INVALID_MESSAGE);
+            setFormMessage(response, "error", PHONE_INVALID_MESSAGE);
+            phoneInput.reportValidity();
+            return;
+          }
+
+          phoneInput.value = normalizedPhone.formatted;
+        }
+
         if (!form.reportValidity()) {
           return;
         }
 
         const formData = new FormData(form);
+        setFormMessage(response, "error", "");
         const message = buildTelegramMessage(formData);
-
-        response.textContent = "";
 
         if (submitButton instanceof HTMLButtonElement) {
           submitButton.disabled = true;
           submitButton.setAttribute("aria-busy", "true");
         }
 
+        form.dataset.submitting = "true";
+
         try {
           await sendLeadToTelegram(message);
-          response.textContent =
-            "\u0421\u043f\u0430\u0441\u0438\u0431\u043e! \u0417\u0430\u044f\u0432\u043a\u0430 \u043e\u0442\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0430, \u043c\u044b \u0441\u043a\u043e\u0440\u043e \u0441\u0432\u044f\u0436\u0435\u043c\u0441\u044f \u0441 \u0432\u0430\u043c\u0438.";
+          setFormMessage(response, "success", SUCCESS_MESSAGE);
           form.reset();
+
+          if (phoneInput instanceof HTMLInputElement) {
+            clearFieldError(phoneInput);
+          }
         } catch (error) {
           console.error("Telegram lead submit failed:", error);
 
-          response.textContent =
+          setFormMessage(
+            response,
+            "error",
             error instanceof Error && error.message === "TELEGRAM_NOT_CONFIGURED"
-              ? "\u0424\u043e\u0440\u043c\u0430 \u0435\u0449\u0435 \u043d\u0435 \u043d\u0430\u0441\u0442\u0440\u043e\u0435\u043d\u0430. \u0423\u043a\u0430\u0436\u0438\u0442\u0435 TELEGRAM_BOT_TOKEN \u0438 TELEGRAM_CHAT_ID \u0432 script.js."
-              : "\u041d\u0435 \u0443\u0434\u0430\u043b\u043e\u0441\u044c \u043e\u0442\u043f\u0440\u0430\u0432\u0438\u0442\u044c \u0437\u0430\u044f\u0432\u043a\u0443. \u041f\u043e\u043f\u0440\u043e\u0431\u0443\u0439\u0442\u0435 \u0435\u0449\u0435 \u0440\u0430\u0437 \u0438\u043b\u0438 \u0441\u0432\u044f\u0436\u0438\u0442\u0435\u0441\u044c \u0441 \u043d\u0430\u043c\u0438 \u043f\u043e \u0442\u0435\u043b\u0435\u0444\u043e\u043d\u0443.";
+              ? NOT_CONFIGURED_MESSAGE
+              : ERROR_MESSAGE
+          );
         } finally {
+          delete form.dataset.submitting;
+
           if (submitButton instanceof HTMLButtonElement) {
             submitButton.disabled = false;
             submitButton.removeAttribute("aria-busy");

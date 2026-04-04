@@ -17,12 +17,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const yandexMapContainer = document.querySelector("[data-yandex-map]");
   const supportsHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
-  const TELEGRAM_BOT_TOKEN = "8621776447:AAF-yqZTlzfjJpGUExIuxa7hNH8hiGxrvPI";
-  const TELEGRAM_CHAT_ID = "1185656239";
-  const TELEGRAM_API_URL = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+  const FORM_WORKER_ENDPOINT = "https://twilight-resonance-4023.tigranosipov987.workers.dev";
   const TELEGRAM_FIELD_LABELS = {
     interest: "\u041d\u0430\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u0435",
     contact: "\u0421\u043f\u043e\u0441\u043e\u0431 \u0441\u0432\u044f\u0437\u0438",
+    contact_handle: "\u0422\u0435\u043b\u0435\u0433\u0440\u0430\u043c \u043a\u043b\u0438\u0435\u043d\u0442\u0430",
     email: "Email",
     message: "\u0421\u043e\u043e\u0431\u0449\u0435\u043d\u0438\u0435",
   };
@@ -563,42 +562,6 @@ document.addEventListener("DOMContentLoaded", () => {
       "\u0421\u043f\u0430\u0441\u0438\u0431\u043e! \u0417\u0430\u044f\u0432\u043a\u0430 \u043e\u0442\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0430, \u043c\u044b \u0441\u043a\u043e\u0440\u043e \u0441\u0432\u044f\u0436\u0435\u043c\u0441\u044f \u0441 \u0432\u0430\u043c\u0438.";
     const ERROR_MESSAGE =
       "\u041d\u0435 \u0443\u0434\u0430\u043b\u043e\u0441\u044c \u043e\u0442\u043f\u0440\u0430\u0432\u0438\u0442\u044c \u0437\u0430\u044f\u0432\u043a\u0443. \u041f\u043e\u043f\u0440\u043e\u0431\u0443\u0439\u0442\u0435 \u0435\u0449\u0435 \u0440\u0430\u0437 \u0438\u043b\u0438 \u0441\u0432\u044f\u0436\u0438\u0442\u0435\u0441\u044c \u0441 \u043d\u0430\u043c\u0438 \u043f\u043e \u0442\u0435\u043b\u0435\u0444\u043e\u043d\u0443.";
-    const NOT_CONFIGURED_MESSAGE =
-      "\u0424\u043e\u0440\u043c\u0430 \u0435\u0449\u0435 \u043d\u0435 \u043d\u0430\u0441\u0442\u0440\u043e\u0435\u043d\u0430. \u0423\u043a\u0430\u0436\u0438\u0442\u0435 TELEGRAM_BOT_TOKEN \u0438 TELEGRAM_CHAT_ID \u0432 script.js.";
-
-    const formatLeadDateTime = () =>
-      new Intl.DateTimeFormat("ru-RU", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-      }).format(new Date());
-
-    const buildTelegramMessage = (formData) => {
-      const name = String(formData.get("name") || "").trim() || "\u2014";
-      const phone = String(formData.get("phone") || "").trim() || "\u2014";
-      const lines = [
-        "\uD83D\uDD25 \u041d\u043e\u0432\u0430\u044f \u0437\u0430\u044f\u0432\u043a\u0430 \u0441 \u0441\u0430\u0439\u0442\u0430",
-        "",
-        `\uD83D\uDC64 \u0418\u043c\u044f: ${name}`,
-        `\uD83D\uDCDE \u0422\u0435\u043b\u0435\u0444\u043e\u043d: ${phone}`,
-        `\uD83D\uDD52 ${formatLeadDateTime()}`,
-      ];
-
-      for (const [key, rawValue] of formData.entries()) {
-        const value = String(rawValue || "").trim();
-
-        if (!value || key === "name" || key === "phone") {
-          continue;
-        }
-
-        const label = TELEGRAM_FIELD_LABELS[key] || key;
-        lines.push(`${label}: ${value}`);
-      }
-
-      return lines.join("\n");
-    };
 
     const setFormMessage = (response, type, message) => {
       if (!response) {
@@ -698,45 +661,33 @@ document.addEventListener("DOMContentLoaded", () => {
       };
     };
 
-    const sendLeadToTelegram = async (message) => {
-      if (
-        !TELEGRAM_BOT_TOKEN ||
-        !TELEGRAM_CHAT_ID ||
-        TELEGRAM_BOT_TOKEN === "PASTE_BOT_TOKEN_HERE" ||
-        TELEGRAM_CHAT_ID === "PASTE_CHAT_ID_HERE"
-      ) {
-        throw new Error("TELEGRAM_NOT_CONFIGURED");
-      }
-
+    const sendLeadToWorker = async (payload) => {
       const controller = new AbortController();
       const timeoutId = window.setTimeout(() => controller.abort(), 15000);
-      let telegramResponse;
+      let workerResponse;
 
       try {
-        telegramResponse = await fetch(TELEGRAM_API_URL, {
+        workerResponse = await fetch(FORM_WORKER_ENDPOINT, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           cache: "no-store",
           signal: controller.signal,
-          body: JSON.stringify({
-            chat_id: TELEGRAM_CHAT_ID,
-            text: message,
-          }),
+          body: JSON.stringify(payload),
         });
       } finally {
         window.clearTimeout(timeoutId);
       }
 
-      if (!telegramResponse.ok) {
-        throw new Error(`TELEGRAM_HTTP_${telegramResponse.status}`);
+      if (!workerResponse.ok) {
+        throw new Error(`WORKER_HTTP_${workerResponse.status}`);
       }
 
-      const telegramResult = await telegramResponse.json();
+      const workerResult = await workerResponse.json();
 
-      if (!telegramResult.ok) {
-        throw new Error(telegramResult.description || "TELEGRAM_API_ERROR");
+      if (!workerResult || workerResult.success !== true) {
+        throw new Error("WORKER_SUBMIT_FAILED");
       }
     };
 
@@ -750,6 +701,26 @@ document.addEventListener("DOMContentLoaded", () => {
       const response = form.querySelector(".form-response");
       const submitButton = form.querySelector('button[type="submit"]');
       const phoneInput = form.querySelector('input[name="phone"]');
+      const contactSelect = form.querySelector('select[name="contact"]');
+      const contactExtra = form.querySelector("[data-contact-extra]");
+      const contactHandleInput = form.querySelector('input[name="contact_handle"]');
+
+      const syncContactMethod = () => {
+        if (!(contactSelect instanceof HTMLSelectElement) || !(contactExtra instanceof HTMLElement) || !(contactHandleInput instanceof HTMLInputElement)) {
+          return;
+        }
+
+        const needsTelegramHandle = contactSelect.value === "\u041d\u0430\u043f\u0438\u0441\u0430\u0442\u044c \u0432 \u0422\u0435\u043b\u0435\u0433\u0440\u0430\u043c";
+
+        contactExtra.hidden = !needsTelegramHandle;
+        contactHandleInput.required = needsTelegramHandle;
+        contactHandleInput.disabled = !needsTelegramHandle;
+
+        if (!needsTelegramHandle) {
+          contactHandleInput.value = "";
+          clearFieldError(contactHandleInput);
+        }
+      };
 
       if (phoneInput instanceof HTMLInputElement) {
         phoneInput.setAttribute("maxlength", "18");
@@ -797,6 +768,23 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
 
+      if (contactSelect instanceof HTMLSelectElement) {
+        contactSelect.addEventListener("change", () => {
+          clearFieldError(contactSelect);
+          setFormMessage(response, "error", "");
+          syncContactMethod();
+        });
+      }
+
+      if (contactHandleInput instanceof HTMLInputElement) {
+        contactHandleInput.addEventListener("input", () => {
+          clearFieldError(contactHandleInput);
+          setFormMessage(response, "error", "");
+        });
+      }
+
+      syncContactMethod();
+
       form.addEventListener("submit", async (event) => {
         event.preventDefault();
 
@@ -829,13 +817,49 @@ document.addEventListener("DOMContentLoaded", () => {
           phoneInput.value = normalizedPhone.formatted;
         }
 
+        if (
+          contactSelect instanceof HTMLSelectElement &&
+          contactHandleInput instanceof HTMLInputElement &&
+          contactSelect.value === "\u041d\u0430\u043f\u0438\u0441\u0430\u0442\u044c \u0432 \u0422\u0435\u043b\u0435\u0433\u0440\u0430\u043c"
+        ) {
+          clearFieldError(contactHandleInput);
+
+          if (!contactHandleInput.value.trim()) {
+            const telegramHandleMessage =
+              "\u041f\u043e\u0436\u0430\u043b\u0443\u0439\u0441\u0442\u0430, \u0443\u043a\u0430\u0436\u0438\u0442\u0435 Telegram \u044e\u0437\u0435\u0440\u043d\u0435\u0439\u043c \u0438\u043b\u0438 \u0441\u0441\u044b\u043b\u043a\u0443 \u043d\u0430 \u0430\u043a\u043a\u0430\u0443\u043d\u0442";
+            setFieldError(contactHandleInput, telegramHandleMessage);
+            setFormMessage(response, "error", telegramHandleMessage);
+            contactHandleInput.reportValidity();
+            return;
+          }
+        }
+
         if (!form.reportValidity()) {
           return;
         }
 
         const formData = new FormData(form);
         setFormMessage(response, "error", "");
-        const message = buildTelegramMessage(formData);
+        const payload = {};
+
+        for (const [key, rawValue] of formData.entries()) {
+          const value = String(rawValue || "").trim();
+
+          if (!value) {
+            continue;
+          }
+
+          if (key === "interest") {
+            payload.course = value;
+            continue;
+          }
+
+          payload[key] = value;
+        }
+
+        payload.name = String(formData.get("name") || "").trim();
+        payload.phone = String(formData.get("phone") || "").trim();
+        payload.course = String(formData.get("interest") || payload.course || "").trim();
 
         if (submitButton instanceof HTMLButtonElement) {
           submitButton.disabled = true;
@@ -845,23 +869,25 @@ document.addEventListener("DOMContentLoaded", () => {
         form.dataset.submitting = "true";
 
         try {
-          await sendLeadToTelegram(message);
+          await sendLeadToWorker(payload);
           setFormMessage(response, "success", SUCCESS_MESSAGE);
           form.reset();
 
           if (phoneInput instanceof HTMLInputElement) {
             clearFieldError(phoneInput);
           }
-        } catch (error) {
-          console.error("Telegram lead submit failed:", error);
 
-          setFormMessage(
-            response,
-            "error",
-            error instanceof Error && error.message === "TELEGRAM_NOT_CONFIGURED"
-              ? NOT_CONFIGURED_MESSAGE
-              : ERROR_MESSAGE
-          );
+          if (contactSelect instanceof HTMLSelectElement) {
+            clearFieldError(contactSelect);
+          }
+
+          if (contactHandleInput instanceof HTMLInputElement) {
+            clearFieldError(contactHandleInput);
+          }
+
+          syncContactMethod();
+        } catch (error) {
+          setFormMessage(response, "error", ERROR_MESSAGE);
         } finally {
           delete form.dataset.submitting;
 

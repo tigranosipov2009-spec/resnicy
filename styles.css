@@ -2045,6 +2045,10 @@ button {
   gap: 8px;
 }
 
+.contact-form__contact-extra[hidden] {
+  display: none !important;
+}
+
 .contact-form span {
   font-size: 0.92rem;
   color: var(--text-soft);

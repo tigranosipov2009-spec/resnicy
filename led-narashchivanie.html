@@ -6,10 +6,14 @@
   <meta name="description" content="LED-наращивание ресниц в Симферополе: обучение для мастеров, которые хотят освоить современную технологию, разобраться в безопасности и добавить новую услугу.">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <title>LED-наращивание ресниц в Симферополе | Анна Гришина</title>
+  <link rel="icon" href="logo-ag.png" type="image/png">
+  <link rel="apple-touch-icon" href="logo-ag.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Prata&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Prata&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Prata&display=swap" rel="stylesheet"></noscript>
   <link rel="stylesheet" href="styles.css">
+  <link rel="preload" as="image" href="led-hero.webp" fetchpriority="high">
   <link rel="canonical" href="https://annalashtrener.ru/led-narashchivanie.html">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="ru_RU">
@@ -17,7 +21,13 @@
   <meta property="og:url" content="https://annalashtrener.ru/led-narashchivanie.html">
   <meta property="og:title" content="LED-наращивание ресниц в Симферополе | Анна Гришина">
   <meta property="og:description" content="LED-наращивание ресниц в Симферополе: обучение для мастеров, которые хотят освоить современную технологию, разобраться в безопасности и добавить новую услугу.">
-  <meta property="og:image" content="https://annalashtrener.ru/process-theory.webp">
+  <meta property="og:image" content="https://annalashtrener.ru/led-hero.webp">
+  <meta property="og:image:alt" content="LED-наращивание ресниц в Симферополе">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="LED-наращивание ресниц в Симферополе | Анна Гришина">
+  <meta name="twitter:description" content="LED-наращивание ресниц в Симферополе: обучение для мастеров, которые хотят освоить современную технологию, разобраться в безопасности и добавить новую услугу.">
+  <meta name="twitter:image" content="https://annalashtrener.ru/led-hero.webp">
+  <meta name="twitter:image:alt" content="LED-наращивание ресниц в Симферополе">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -28,6 +38,16 @@
         "name": "Анна Гришина",
         "url": "https://annalashtrener.ru/",
         "telephone": "+7-978-046-31-98",
+        "contactPoint": [
+          {
+            "@type": "ContactPoint",
+            "telephone": "+7-978-046-31-98",
+            "contactType": "запись на обучение",
+            "availableLanguage": [
+              "ru"
+            ]
+          }
+        ],
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Симферополь",
@@ -72,6 +92,24 @@
     ]
   }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": "https://annalashtrener.ru/led-narashchivanie.html#service",
+    "name": "LED-наращивание ресниц в Симферополе",
+    "serviceType": "Обучение LED-наращиванию ресниц",
+    "description": "LED-наращивание ресниц в Симферополе: обучение для мастеров, которые хотят освоить современную технологию, разобраться в безопасности и добавить новую услугу.",
+    "url": "https://annalashtrener.ru/led-narashchivanie.html",
+    "areaServed": {
+      "@type": "City",
+      "name": "Симферополь"
+    },
+    "provider": {
+      "@id": "https://annalashtrener.ru/#studio"
+    }
+  }
+  </script>
 </head>
 <body class="tariff-page tariff-page--led">
   <div class="page-shell">
@@ -83,7 +121,7 @@
           </span>
         </a>
 
-        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Открыть меню">
           <span class="menu-toggle__icon" aria-hidden="true">
             <span class="menu-toggle__line"></span>
             <span class="menu-toggle__line"></span>
@@ -107,7 +145,7 @@
     <main>
       <section class="section tariff-hero">
         <div class="tariff-hero__layout">
-          <div class="tariff-hero__content" data-reveal="fade-up">
+          <div class="tariff-hero__content">
             <p class="eyebrow">LED-направление</p>
             <h1><span class="heading-accent">LED</span>-наращивание</h1>
             <p class="tariff-hero__lead">LED-наращивание ресниц в Симферополе для мастеров, которые хотят освоить современную технологию, разобраться в безопасности и добавить в работу сильное новое направление.</p>
@@ -124,7 +162,7 @@
             </div>
           </div>
 
-          <div class="tariff-hero__visual" data-reveal="fade-up">
+          <div class="tariff-hero__visual">
             <img src="led-hero.webp" alt="LED-наращивание ресниц в Симферополе — практика для мастеров с LED-лампой" loading="eager" decoding="async" fetchpriority="high">
           </div>
         </div>
@@ -171,15 +209,15 @@
             <input type="hidden" name="interest" value="LED-наращивание">
             <label>
               <span>Ваше имя</span>
-              <input type="text" name="name" placeholder="Как к вам обращаться" autocomplete="name" required>
+              <input type="text" name="name" placeholder="Как к вам обращаться" autocomplete="name" aria-label="Ваше имя" required>
             </label>
             <label>
               <span>Телефон</span>
-              <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" inputmode="tel" autocomplete="tel" required>
+              <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" inputmode="tel" autocomplete="tel" aria-label="Телефон" required>
             </label>
             <label>
               <span>Как удобнее связаться</span>
-              <select name="contact" required>
+              <select name="contact" aria-label="Как удобнее связаться" required>
                 <option value="" selected disabled>Выберите способ связи</option>
                 <option value="Позвонить">Позвонить</option>
                 <option value="Написать в Телеграм">Написать в Телеграм</option>
@@ -212,7 +250,7 @@
     </footer>
   </div>
 
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>
 

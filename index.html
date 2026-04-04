@@ -6,10 +6,14 @@
   <meta name="description" content="Курсы наращивания ресниц в Симферополе: обучение с нуля, повышение квалификации, LED и онлайн-продукты. Практика, сертификат и запись по заявке.">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <title>Обучение наращиванию ресниц в Симферополе | Анна Гришина</title>
+  <link rel="icon" href="logo-ag.png" type="image/png">
+  <link rel="apple-touch-icon" href="logo-ag.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Prata&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Prata&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Prata&display=swap" rel="stylesheet"></noscript>
   <link rel="stylesheet" href="styles.css">
+  <link rel="preload" as="image" href="hero-main-blonde.webp" fetchpriority="high" media="(min-width: 721px)">
   <link rel="canonical" href="https://annalashtrener.ru/">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="ru_RU">
@@ -18,6 +22,12 @@
   <meta property="og:title" content="Обучение наращиванию ресниц в Симферополе | Анна Гришина">
   <meta property="og:description" content="Курсы наращивания ресниц в Симферополе: обучение с нуля, повышение квалификации, LED и онлайн-продукты. Практика, сертификат и запись по заявке.">
   <meta property="og:image" content="https://annalashtrener.ru/hero-main-blonde.webp">
+  <meta property="og:image:alt" content="Обучение наращиванию ресниц в Симферополе">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Обучение наращиванию ресниц в Симферополе | Анна Гришина">
+  <meta name="twitter:description" content="Курсы наращивания ресниц в Симферополе: обучение с нуля, повышение квалификации, LED и онлайн-продукты. Практика, сертификат и запись по заявке.">
+  <meta name="twitter:image" content="https://annalashtrener.ru/hero-main-blonde.webp">
+  <meta name="twitter:image:alt" content="Обучение наращиванию ресниц в Симферополе">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -29,6 +39,16 @@
         "image": "https://annalashtrener.ru/hero-main-blonde.webp",
         "url": "https://annalashtrener.ru/",
         "telephone": "+7-978-046-31-98",
+        "contactPoint": [
+          {
+            "@type": "ContactPoint",
+            "telephone": "+7-978-046-31-98",
+            "contactType": "запись на обучение",
+            "availableLanguage": [
+              "ru"
+            ]
+          }
+        ],
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Симферополь",
@@ -86,14 +106,6 @@
           },
           {
             "@type": "Question",
-            "name": "Можно ли обучиться ламинированию ресниц?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "По запросу подскажем формат и добавим отдельный модуль в программу."
-            }
-          },
-          {
-            "@type": "Question",
             "name": "Помогаете ли с первыми клиентами и ростом после обучения?",
             "acceptedAnswer": {
               "@type": "Answer",
@@ -113,6 +125,24 @@
     ]
   }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": "https://annalashtrener.ru/#service",
+    "name": "Обучение наращиванию ресниц в Симферополе",
+    "serviceType": "Курсы по наращиванию ресниц",
+    "description": "Обучение наращиванию ресниц в Симферополе для новичков и мастеров: базовый курс, повышение квалификации, LED-наращивание и онлайн-продукты.",
+    "url": "https://annalashtrener.ru/",
+    "areaServed": {
+      "@type": "City",
+      "name": "Симферополь"
+    },
+    "provider": {
+      "@id": "https://annalashtrener.ru/#studio"
+    }
+  }
+  </script>
 </head>
 <body>
   <div class="page-shell">
@@ -124,7 +154,7 @@
           </span>
         </a>
 
-        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Открыть меню">
           <span class="menu-toggle__icon" aria-hidden="true">
             <span class="menu-toggle__line"></span>
             <span class="menu-toggle__line"></span>
@@ -152,7 +182,7 @@
       <section class="hero" aria-labelledby="hero-title">
         <div class="hero__backdrop"></div>
         <div class="hero__container">
-          <div class="hero__content" data-reveal="fade-up">
+          <div class="hero__content">
             <h1 id="hero-title">Обучение наращиванию ресниц в&nbsp;Симферополе <span class="heading-accent">с&nbsp;нуля до&nbsp;первых клиентов</span></h1>
             <p class="hero__lead">
               Для новичков и мастеров, легкий старт в профессии, повышение квалификации, разбор ошибок, авторская методология.
@@ -182,22 +212,24 @@
           </div>
 
           <div class="hero__visual" aria-hidden="true">
-            <div class="hero__visual-main" data-reveal="fade-up">
+            <div class="hero__visual-main">
               <img
                 src="hero-main-blonde.webp"
                 alt="Модель с наращиванием ресниц после обучения в Симферополе"
+                loading="eager"
                 decoding="async"
                 fetchpriority="high"
               >
             </div>
-            <div class="hero__visual-note hero__visual-note--top" data-reveal="fade-up">
+            <div class="hero__visual-note hero__visual-note--top">
               <span class="hero__visual-label">Живая практика</span>
               <p>Постановка руки, разбор техники и работа на модели без перегруза.</p>
             </div>
-            <div class="hero__visual-note hero__visual-note--bottom" data-reveal="fade-up">
+            <div class="hero__visual-note hero__visual-note--bottom">
               <img
                 src="hero-note-catalog.webp"
                 alt="Схемы для обучения наращиванию ресниц"
+                loading="lazy"
                 decoding="async"
               >
               <div>
@@ -602,16 +634,6 @@
 
           <article class="faq-item">
             <button class="faq-item__button" type="button" aria-expanded="false">
-              <span>Можно ли обучиться ламинированию ресниц?</span>
-              <span class="faq-item__icon" aria-hidden="true"></span>
-            </button>
-            <div class="faq-item__content">
-              <p>По запросу подскажем формат и добавим отдельный модуль в программу.</p>
-            </div>
-          </article>
-
-          <article class="faq-item">
-            <button class="faq-item__button" type="button" aria-expanded="false">
               <span>Помогаете с первыми клиентами и ростом после обучения?</span>
               <span class="faq-item__icon" aria-hidden="true"></span>
             </button>
@@ -675,15 +697,15 @@
           <form class="contact-form" data-reveal="fade-up">
             <label>
               <span>Ваше имя</span>
-              <input type="text" name="name" placeholder="Как к вам обращаться" autocomplete="name" required>
+              <input type="text" name="name" placeholder="Как к вам обращаться" autocomplete="name" aria-label="Ваше имя" required>
             </label>
             <label>
               <span>Телефон</span>
-              <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" inputmode="tel" autocomplete="tel" required>
+              <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" inputmode="tel" autocomplete="tel" aria-label="Телефон" required>
             </label>
             <label>
               <span>Что вам интересно</span>
-              <select name="interest" required>
+              <select name="interest" aria-label="Что вам интересно" required>
                 <option value="" selected disabled>Выберите тариф</option>
                 <option value="Базовый курс «Успешный старт»">Базовый курс «Успешный старт»</option>
                 <option value="Повышение квалификации. Практикум «Работа над ошибками»">Повышение квалификации. Практикум «Работа над ошибками»</option>
@@ -693,7 +715,7 @@
             </label>
             <label>
               <span>Как удобнее связаться</span>
-              <select name="contact" required>
+              <select name="contact" aria-label="Как удобнее связаться" required>
                 <option value="" selected disabled>Выберите способ связи</option>
                 <option value="Позвонить">Позвонить</option>
                 <option value="Написать в Телеграм">Написать в Телеграм</option>
@@ -744,7 +766,7 @@
 
   </div>
 
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>
 

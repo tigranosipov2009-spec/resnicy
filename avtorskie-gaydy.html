@@ -6,10 +6,14 @@
   <meta name="description" content="Онлайн-продукты и авторские пособия по ресницам: схемы, гайды и уроки для самостоятельной практики, повторения и дистанционного обучения.">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <title>Онлайн-продукты по ресницам | Анна Гришина</title>
+  <link rel="icon" href="logo-ag.png" type="image/png">
+  <link rel="apple-touch-icon" href="logo-ag.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Prata&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Prata&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Prata&display=swap" rel="stylesheet"></noscript>
   <link rel="stylesheet" href="styles.css">
+  <link rel="preload" as="image" href="program-notebook.webp" fetchpriority="high">
   <link rel="canonical" href="https://annalashtrener.ru/avtorskie-gaydy.html">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="ru_RU">
@@ -18,6 +22,12 @@
   <meta property="og:title" content="Онлайн-продукты по ресницам | Анна Гришина">
   <meta property="og:description" content="Онлайн-продукты и авторские пособия по ресницам: схемы, гайды и уроки для самостоятельной практики, повторения и дистанционного обучения.">
   <meta property="og:image" content="https://annalashtrener.ru/program-notebook.webp">
+  <meta property="og:image:alt" content="Онлайн-продукты и авторские пособия по ресницам">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Онлайн-продукты по ресницам | Анна Гришина">
+  <meta name="twitter:description" content="Онлайн-продукты и авторские пособия по ресницам: схемы, гайды и уроки для самостоятельной практики, повторения и дистанционного обучения.">
+  <meta name="twitter:image" content="https://annalashtrener.ru/program-notebook.webp">
+  <meta name="twitter:image:alt" content="Онлайн-продукты и авторские пособия по ресницам">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -28,6 +38,16 @@
         "name": "Анна Гришина",
         "url": "https://annalashtrener.ru/",
         "telephone": "+7-978-046-31-98",
+        "contactPoint": [
+          {
+            "@type": "ContactPoint",
+            "telephone": "+7-978-046-31-98",
+            "contactType": "запись на обучение",
+            "availableLanguage": [
+              "ru"
+            ]
+          }
+        ],
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Симферополь",
@@ -72,6 +92,24 @@
     ]
   }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": "https://annalashtrener.ru/avtorskie-gaydy.html#service",
+    "name": "Онлайн-продукты и авторские пособия по ресницам",
+    "serviceType": "Онлайн-обучение и методические материалы по ресницам",
+    "description": "Онлайн-продукты и авторские пособия по ресницам: схемы, гайды и уроки для самостоятельной практики, повторения и дистанционного обучения.",
+    "url": "https://annalashtrener.ru/avtorskie-gaydy.html",
+    "areaServed": {
+      "@type": "City",
+      "name": "Симферополь"
+    },
+    "provider": {
+      "@id": "https://annalashtrener.ru/#studio"
+    }
+  }
+  </script>
 </head>
 <body class="tariff-page tariff-page--guides">
   <div class="page-shell">
@@ -83,7 +121,7 @@
           </span>
         </a>
 
-        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Открыть меню">
           <span class="menu-toggle__icon" aria-hidden="true">
             <span class="menu-toggle__line"></span>
             <span class="menu-toggle__line"></span>
@@ -107,7 +145,7 @@
     <main>
       <section class="section tariff-hero">
         <div class="tariff-hero__layout">
-          <div class="tariff-hero__content" data-reveal="fade-up">
+          <div class="tariff-hero__content">
             <p class="eyebrow">Онлайн-формат</p>
             <h1>Онлайн-продукты / <span class="heading-accent">авторские пособия</span></h1>
             <p class="tariff-hero__lead">Онлайн-продукты по ресницам для тех, кому удобнее учиться дистанционно, возвращаться к схемам и усиливать практику в своем темпе без привязки к очному формату.</p>
@@ -124,7 +162,7 @@
             </div>
           </div>
 
-          <div class="tariff-hero__visual" data-reveal="fade-up">
+          <div class="tariff-hero__visual">
             <img src="program-notebook.webp" alt="Онлайн-продукты и авторские пособия по наращиванию ресниц" loading="eager" decoding="async" fetchpriority="high">
           </div>
         </div>
@@ -169,15 +207,15 @@
             <input type="hidden" name="interest" value="Онлайн-продукты / авторские пособия">
             <label>
               <span>Ваше имя</span>
-              <input type="text" name="name" placeholder="Как к вам обращаться" autocomplete="name" required>
+              <input type="text" name="name" placeholder="Как к вам обращаться" autocomplete="name" aria-label="Ваше имя" required>
             </label>
             <label>
               <span>Телефон</span>
-              <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" inputmode="tel" autocomplete="tel" required>
+              <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" inputmode="tel" autocomplete="tel" aria-label="Телефон" required>
             </label>
             <label>
               <span>Как удобнее связаться</span>
-              <select name="contact" required>
+              <select name="contact" aria-label="Как удобнее связаться" required>
                 <option value="" selected disabled>Выберите способ связи</option>
                 <option value="Позвонить">Позвонить</option>
                 <option value="Написать в Телеграм">Написать в Телеграм</option>
@@ -210,7 +248,7 @@
     </footer>
   </div>
 
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>
 

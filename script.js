@@ -478,7 +478,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   safeRun("yandex-map", () => {
-    if (!yandexMapContainer || typeof window.ymaps3 === "undefined") {
+    if (!yandexMapContainer) {
       return;
     }
 
@@ -491,12 +491,43 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
+    const coordinates = [longitude, latitude];
+
+    const renderMapFallback = () => {
+      if (yandexMapContainer.dataset.mapFallback === "true") {
+        return;
+      }
+
+      yandexMapContainer.dataset.mapFallback = "true";
+      yandexMapContainer.innerHTML = `
+        <iframe
+          src="https://yandex.ru/map-widget/v1/?ll=${longitude}%2C${latitude}&z=16&pt=${longitude},${latitude},pm2rdm"
+          loading="lazy"
+          title="${mapTitle}, ${mapAddress}"
+          aria-label="Карта: ${mapTitle}, ${mapAddress}"
+        ></iframe>
+      `;
+    };
+
+    const waitForYmaps3 = async () => {
+      const maxAttempts = 24;
+
+      for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
+        if (typeof window.ymaps3 !== "undefined") {
+          await window.ymaps3.ready;
+          return window.ymaps3;
+        }
+
+        await new Promise((resolve) => window.setTimeout(resolve, 250));
+      }
+
+      throw new Error("YMAPS3_NOT_AVAILABLE");
+    };
+
     const initYandexMap = async () => {
       try {
-        await window.ymaps3.ready;
-
-        const { YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer, YMapMarker } = window.ymaps3;
-        const coordinates = [longitude, latitude];
+        const ymaps3 = await waitForYmaps3();
+        const { YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer, YMapMarker } = ymaps3;
         const markerElement = document.createElement("div");
 
         markerElement.className = "contact-map__marker";
@@ -517,8 +548,9 @@ document.addEventListener("DOMContentLoaded", () => {
         map.addChild(new YMapMarker({ coordinates }, markerElement));
 
         yandexMapContainer._yandexMap = map;
-      } catch (_) {
-        yandexMapContainer.innerHTML = "";
+      } catch (error) {
+        console.error("Yandex map init failed:", error);
+        renderMapFallback();
       }
     };
 

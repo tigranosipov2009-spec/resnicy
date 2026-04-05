@@ -483,6 +483,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.body.dataset.telegramGoalBound = "true";
 
+    const sendTelegramGoal = () => {
+      try {
+        if (typeof window.ym === "function") {
+          window.ym(108399553, "reachGoal", "telegram_click");
+        }
+      } catch (metricaError) {
+        console.error("Yandex Metrica telegram goal failed:", metricaError);
+      }
+    };
+
     document.addEventListener("click", (event) => {
       const target = event.target;
 
@@ -496,13 +506,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      try {
-        if (typeof window.ym === "function") {
-          window.ym(108399553, "reachGoal", "telegram_click");
-        }
-      } catch (metricaError) {
-        console.error("Yandex Metrica telegram goal failed:", metricaError);
-      }
+      window.setTimeout(sendTelegramGoal, 80);
     });
   });
 

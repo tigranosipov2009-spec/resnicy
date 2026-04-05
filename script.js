@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const yandexMapContainer = document.querySelector("[data-yandex-map]");
   const supportsHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
-  const FORM_WORKER_ENDPOINT = "https://twilight-resonance-4023.tigranosipov987.workers.dev";
+  const FORM_WORKER_ENDPOINT = "https://api.anna-lashtrener.ru/lead";
   const TELEGRAM_FIELD_LABELS = {
     interest: "\u041d\u0430\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u0435",
     contact: "\u0421\u043f\u043e\u0441\u043e\u0431 \u0441\u0432\u044f\u0437\u0438",

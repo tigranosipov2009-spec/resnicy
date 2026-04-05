@@ -944,12 +944,16 @@ document.addEventListener("DOMContentLoaded", () => {
           await sendLeadToWorker(payload);
           setFormMessage(response, "success", SUCCESS_MESSAGE);
 
-          try {
-            if (typeof window.ym === "function") {
-              window.ym(108399553, "reachGoal", "form_submit");
-            }
-          } catch (metricaError) {
-            console.error("Yandex Metrica goal failed:", metricaError);
+          if (form.matches("#lead-form")) {
+            window.setTimeout(() => {
+              try {
+                if (typeof window.ym === "function") {
+                  window.ym(108399553, "reachGoal", "form_submit");
+                }
+              } catch (metricaError) {
+                console.error("Yandex Metrica goal failed:", metricaError);
+              }
+            }, 150);
           }
 
           form.reset();

@@ -477,96 +477,74 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   safeRun("telegram-click-goal", () => {
-    if (document.body.dataset.telegramGoalBound === "true") {
-      return;
-    }
+    const telegramLinks = document.querySelectorAll('a[href*="t.me"], a[href*="telegram.me"], a[href^="tg://"], a[href*="tg://"]');
 
-    document.body.dataset.telegramGoalBound = "true";
-
-    const sendTelegramGoal = () => {
-      try {
-        if (typeof window.ym === "function") {
-          window.ym(108399553, "reachGoal", "telegram_click");
-        }
-      } catch (metricaError) {
-        console.error("Yandex Metrica telegram goal failed:", metricaError);
-      }
-    };
-
-    document.addEventListener("click", (event) => {
-      const target = event.target;
-
-      if (!(target instanceof Element)) {
+    telegramLinks.forEach((telegramLink) => {
+      if (!(telegramLink instanceof HTMLAnchorElement) || telegramLink.dataset.telegramGoalBound === "true") {
         return;
       }
 
-      const telegramLink = target.closest('a[href*="t.me"], a[href*="telegram.me"], a[href^="tg://"], a[href*="tg://"]');
+      telegramLink.dataset.telegramGoalBound = "true";
 
-      if (!(telegramLink instanceof HTMLAnchorElement)) {
-        return;
-      }
-
-      window.setTimeout(sendTelegramGoal, 80);
+      telegramLink.addEventListener("click", () => {
+        window.setTimeout(() => {
+          try {
+            if (typeof window.ym === "function") {
+              window.ym(108399553, "reachGoal", "telegram_click");
+            }
+          } catch (metricaError) {
+            console.error("Yandex Metrica telegram goal failed:", metricaError);
+          }
+        }, 150);
+      });
     });
   });
 
   safeRun("phone-click-goal", () => {
-    if (document.body.dataset.phoneGoalBound === "true") {
-      return;
-    }
+    const phoneLinks = document.querySelectorAll('a[href^="tel:"], a[href*="tel:"]');
 
-    document.body.dataset.phoneGoalBound = "true";
-
-    document.addEventListener("click", (event) => {
-      const target = event.target;
-
-      if (!(target instanceof Element)) {
+    phoneLinks.forEach((phoneLink) => {
+      if (!(phoneLink instanceof HTMLAnchorElement) || phoneLink.dataset.phoneGoalBound === "true") {
         return;
       }
 
-      const phoneLink = target.closest('a[href^="tel:"], a[href*="tel:"]');
+      phoneLink.dataset.phoneGoalBound = "true";
 
-      if (!(phoneLink instanceof HTMLAnchorElement)) {
-        return;
-      }
-
-      try {
-        if (typeof window.ym === "function") {
-          window.ym(108399553, "reachGoal", "phone_click");
-        }
-      } catch (metricaError) {
-        console.error("Yandex Metrica phone goal failed:", metricaError);
-      }
+      phoneLink.addEventListener("click", () => {
+        window.setTimeout(() => {
+          try {
+            if (typeof window.ym === "function") {
+              window.ym(108399553, "reachGoal", "phone_click");
+            }
+          } catch (metricaError) {
+            console.error("Yandex Metrica phone goal failed:", metricaError);
+          }
+        }, 150);
+      });
     });
   });
 
   safeRun("cta-click-goal", () => {
-    if (document.body.dataset.ctaGoalBound === "true") {
-      return;
-    }
+    const ctaButtons = document.querySelectorAll("a.button--primary, button.button--primary");
 
-    document.body.dataset.ctaGoalBound = "true";
-
-    document.addEventListener("click", (event) => {
-      const target = event.target;
-
-      if (!(target instanceof Element)) {
+    ctaButtons.forEach((ctaButton) => {
+      if (!(ctaButton instanceof HTMLElement) || ctaButton.dataset.ctaGoalBound === "true") {
         return;
       }
 
-      const ctaButton = target.closest("a.button--primary, button.button--primary");
+      ctaButton.dataset.ctaGoalBound = "true";
 
-      if (!(ctaButton instanceof HTMLElement)) {
-        return;
-      }
-
-      try {
-        if (typeof window.ym === "function") {
-          window.ym(108399553, "reachGoal", "cta_click");
-        }
-      } catch (metricaError) {
-        console.error("Yandex Metrica CTA goal failed:", metricaError);
-      }
+      ctaButton.addEventListener("click", () => {
+        window.setTimeout(() => {
+          try {
+            if (typeof window.ym === "function") {
+              window.ym(108399553, "reachGoal", "cta_click");
+            }
+          } catch (metricaError) {
+            console.error("Yandex Metrica CTA goal failed:", metricaError);
+          }
+        }, 150);
+      });
     });
   });
 

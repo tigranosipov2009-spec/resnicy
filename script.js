@@ -501,7 +501,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   safeRun("phone-click-goal", () => {
-    const phoneLinks = document.querySelectorAll('a[href^="tel:"], a[href*="tel:"]');
+    const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
 
     phoneLinks.forEach((phoneLink) => {
       if (!(phoneLink instanceof HTMLAnchorElement) || phoneLink.dataset.phoneGoalBound === "true") {

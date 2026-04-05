@@ -2054,6 +2054,15 @@ button {
   color: var(--text-soft);
 }
 
+.contact-form__fallback-note {
+  margin: -4px 0 0;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--text-soft);
+  text-align: center;
+  text-wrap: balance;
+}
+
 .contact-form input,
 .contact-form select {
   width: 100%;

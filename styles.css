@@ -2063,6 +2063,27 @@ button {
   text-wrap: balance;
 }
 
+.seo-copy {
+  padding: 14px 0 18px;
+}
+
+.seo-copy__card {
+  width: min(980px, 100%);
+  margin: 0 auto;
+  padding: 24px 28px;
+  border-radius: 26px;
+  background: rgba(255, 252, 248, 0.78);
+  border: 1px solid rgba(104, 80, 73, 0.08);
+  box-shadow: 0 18px 44px rgba(79, 54, 45, 0.08);
+}
+
+.seo-copy__card p {
+  margin: 0;
+  color: var(--text-soft);
+  font-size: 0.98rem;
+  line-height: 1.8;
+}
+
 .contact-form input,
 .contact-form select {
   width: 100%;
@@ -3383,6 +3404,10 @@ button {
     position: relative;
     top: 0;
   }
+
+  .seo-copy__card {
+    padding: 22px 22px;
+  }
 }
 
 @media (max-width: 900px) {
@@ -3411,6 +3436,20 @@ button {
 
   .tariff-detail__spot--offset {
     transform: none;
+  }
+
+  .seo-copy {
+    padding: 6px 0 10px;
+  }
+
+  .seo-copy__card {
+    padding: 20px 18px;
+    border-radius: 22px;
+  }
+
+  .seo-copy__card p {
+    font-size: 0.94rem;
+    line-height: 1.75;
   }
 
   .tariff-page--base .tariff-detail__spot--main {

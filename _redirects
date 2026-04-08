@@ -1,6 +1,11 @@
-/bazovyy-kurs /bazovyy-kurs.html 301
-/povyshenie-kvalifikatsii /povyshenie-kvalifikatsii.html 301
-/led-narashchivanie /led-narashchivanie.html 301
-/avtorskie-gaydy /avtorskie-gaydy.html 301
-/rabota-nad-oshibkami /povyshenie-kvalifikatsii.html 301
-/rabota-nad-oshibkami.html /povyshenie-kvalifikatsii.html 301
+/index.html / 301
+/bazovyy-kurs /bazovyy-kurs.html 200
+/bazovyy-kurs.html /bazovyy-kurs 301
+/povyshenie-kvalifikatsii /povyshenie-kvalifikatsii.html 200
+/povyshenie-kvalifikatsii.html /povyshenie-kvalifikatsii 301
+/led-narashchivanie /led-narashchivanie.html 200
+/led-narashchivanie.html /led-narashchivanie 301
+/avtorskie-gaydy /avtorskie-gaydy.html 200
+/avtorskie-gaydy.html /avtorskie-gaydy 301
+/rabota-nad-oshibkami /povyshenie-kvalifikatsii 301
+/rabota-nad-oshibkami.html /povyshenie-kvalifikatsii 301

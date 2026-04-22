@@ -38,6 +38,49 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+  safeRun("local-file-link-fallback", () => {
+    if (window.location.protocol !== "file:") {
+      return;
+    }
+
+    const fileHrefMap = new Map([
+      ["/", "index.html"],
+      ["/#top", "index.html#top"],
+      ["/#programs", "index.html#programs"],
+      ["/bazovyy-kurs", "bazovyy-kurs.html"],
+      ["/povyshenie-kvalifikatsii", "povyshenie-kvalifikatsii.html"],
+      ["/led-narashchivanie", "led-narashchivanie.html"],
+      ["/avtorskie-gaydy", "avtorskie-gaydy.html"],
+      ["/rabota-nad-oshibkami", "rabota-nad-oshibkami.html"],
+    ]);
+
+    const rewriteLocalHref = (value) => {
+      if (!value || /^([a-z]+:|#|tel:|mailto:)/i.test(value)) {
+        return value;
+      }
+
+      return fileHrefMap.get(value) || value;
+    };
+
+    document.querySelectorAll("a[href]").forEach((link) => {
+      const href = link.getAttribute("href");
+      const localHref = rewriteLocalHref(href);
+
+      if (localHref && localHref !== href) {
+        link.setAttribute("href", localHref);
+      }
+    });
+
+    linkedCards.forEach((card) => {
+      const href = card.getAttribute("data-card-href");
+      const localHref = rewriteLocalHref(href);
+
+      if (localHref && localHref !== href) {
+        card.setAttribute("data-card-href", localHref);
+      }
+    });
+  });
+
   const showRevealFallback = () => {
     document.documentElement.classList.remove("reveal-ready");
     revealItems.forEach((item) => item.classList.add("is-visible"));

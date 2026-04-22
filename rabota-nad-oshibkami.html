@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0; url=/povyshenie-kvalifikatsii">
+  <meta http-equiv="refresh" content="0; url=povyshenie-kvalifikatsii.html">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex,follow">
   <title>Переадресация на практикум «Работа над ошибками»</title>
@@ -20,11 +20,22 @@
   </script>
   <!-- /Yandex.Metrika counter -->
   <script>
-    window.location.replace("/povyshenie-kvalifikatsii");
+    window.location.replace(window.location.protocol === "file:" ? "povyshenie-kvalifikatsii.html" : "/povyshenie-kvalifikatsii");
   </script>
 </head>
 <body>
   <noscript><div><img src="https://mc.yandex.ru/watch/108399553" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-  <p>Страница перемещена. Если переадресация не сработала, откройте <a href="/povyshenie-kvalifikatsii">страницу повышения квалификации</a>.</p>
+  <p>Страница перемещена. Если переадресация не сработала, откройте <a href="povyshenie-kvalifikatsii.html" data-live-href="/povyshenie-kvalifikatsii">страницу повышения квалификации</a>.</p>
+  <script>
+    if (window.location.protocol !== "file:") {
+      const liveLink = document.querySelector("[data-live-href]");
+
+      if (liveLink instanceof HTMLAnchorElement) {
+        liveLink.setAttribute("href", liveLink.dataset.liveHref || liveLink.getAttribute("href"));
+      }
+    }
+  </script>
 </body>
 </html>
+
+

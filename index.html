@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
@@ -84,7 +84,7 @@
           "name": "Симферополь"
         },
         "description": "Обучение наращиванию ресниц в Симферополе с нуля до первых клиентов: базовый курс, повышение квалификации, LED-наращивание и авторские материалы для новичков и мастеров.",
-        "priceRange": "₽₽",
+        "priceRange": "от 499 ₽ до 20 000 ₽",
         "sameAs": [
           "https://t.me/annalashtrener",
           "https://t.me/love_lashes_simf",
@@ -97,6 +97,9 @@
           "itemListElement": [
             {
               "@type": "Offer",
+              "price": "20000",
+              "priceCurrency": "RUB",
+              "url": "https://anna-lashtrener.ru/bazovyy-kurs",
               "itemOffered": {
                 "@type": "Service",
                 "name": "Базовый курс «Успешный старт»"
@@ -104,6 +107,9 @@
             },
             {
               "@type": "Offer",
+              "price": "12000",
+              "priceCurrency": "RUB",
+              "url": "https://anna-lashtrener.ru/povyshenie-kvalifikatsii",
               "itemOffered": {
                 "@type": "Service",
                 "name": "Повышение квалификации. Практикум «Работа над ошибками»"
@@ -111,6 +117,13 @@
             },
             {
               "@type": "Offer",
+              "priceSpecification": {
+                "@type": "PriceSpecification",
+                "minPrice": "499",
+                "maxPrice": "8000",
+                "priceCurrency": "RUB"
+              },
+              "url": "https://anna-lashtrener.ru/avtorskie-gaydy",
               "itemOffered": {
                 "@type": "Service",
                 "name": "Онлайн-продукты / авторские пособия"
@@ -118,6 +131,9 @@
             },
             {
               "@type": "Offer",
+              "price": "12000",
+              "priceCurrency": "RUB",
+              "url": "https://anna-lashtrener.ru/led-narashchivanie",
               "itemOffered": {
                 "@type": "Service",
                 "name": "LED-наращивание"
@@ -181,6 +197,22 @@
               "@type": "Answer",
               "text": "Да, есть отдельный формат с онлайн-продуктами, гайдами, схемами и материалами без полного курса."
             }
+          },
+          {
+            "@type": "Question",
+            "name": "Сколько стоит обучение наращиванию ресниц в Симферополе?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Базовый курс — 20 000 ₽, практикум «Работа над ошибками» — 12 000 ₽, LED-наращивание — 12 000 ₽. Онлайн-продукты — от 499 ₽ до 8 000 ₽."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Какой формат обучения выбрать: базовый курс, практикум, LED или онлайн-материалы?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Если вы начинаете с нуля — выбирайте базовый курс. Если уже работаете и хотите усилить технику — подойдет практикум «Работа над ошибками». Если хотите добавить современную услугу — LED-наращивание. Если удобнее учиться дистанционно — подойдут онлайн-продукты и авторские пособия."
+            }
           }
         ]
       }
@@ -199,6 +231,13 @@
     "areaServed": {
       "@type": "City",
       "name": "Симферополь"
+    },
+    "offers": {
+      "@type": "AggregateOffer",
+      "lowPrice": "499",
+      "highPrice": "20000",
+      "priceCurrency": "RUB",
+      "offerCount": "4"
     },
     "provider": {
       "@id": "https://anna-lashtrener.ru/#studio"
@@ -226,7 +265,7 @@
       <div class="site-header__inner">
         <a class="brand" href="#top" aria-label="Перейти к началу страницы">
           <span class="brand__logo-wrap" aria-hidden="true">
-            <img class="brand__logo-image" src="logo-ag.webp" alt="" loading="eager" decoding="async">
+            <img class="brand__logo-image" src="logo-ag-mentor.svg" alt="" loading="eager" decoding="async">
           </span>
         </a>
 
@@ -375,7 +414,7 @@
                 </a>
               </div>
 
-              <a class="button button--primary button--full" href="#contacts" data-metrica-target="main-cta" data-metrica-location="teacher">Получить программу обучения</a>
+              <a class="button button--primary button--full" href="#programs" data-metrica-target="main-cta" data-metrica-location="teacher">Выбрать программу обучения</a>
               <a class="button button--ghost trust-panel__booking-button" href="https://dikidi.net/527147" target="_blank" rel="noopener noreferrer" data-metrica-target="booking-click" data-metrica-location="teacher">Онлайн-запись на ресницы</a>
               <a class="button button--ghost trust-panel__works-button" href="https://t.me/lovelashes_boss" target="_blank" rel="noopener noreferrer" data-metrica-target="telegram-click" data-metrica-location="teacher-works">Посмотреть работы мастера</a>
             </div>
@@ -437,10 +476,14 @@
               <span class="program-card__duration">старт в профессии</span>
             </div>
             <h3>Базовый курс «Успешный старт»</h3>
+            <div class="program-card__price">
+              <strong>20 000 ₽</strong>
+              <span>Онлайн-теория, 3 дня практики, 3 модели</span>
+            </div>
             <p>Для тех, кто хочет освоить профессию с нуля, сформировать сильную базу и спокойно выйти к первым клиентам.</p>
             <ul class="program-card__list">
               <li>Понятная теория и постановка руки</li>
-              <li>Практика на моделях и разбор ошибок</li>
+              <li>2 методических пособия и практика на моделях</li>
               <li>Сильная база для уверенного старта</li>
             </ul>
             <div class="program-card__actions">
@@ -455,11 +498,15 @@
               <span class="program-card__duration">практикум для мастеров</span>
             </div>
             <h3>Повышение квалификации. Практикум «Работа над ошибками»</h3>
+            <div class="program-card__price">
+              <strong>12 000 ₽</strong>
+              <span>С отработкой на модели</span>
+            </div>
             <p>Для мастеров, которым важно увидеть слабые места, усилить технику и выйти на более стабильный результат в работе.</p>
             <ul class="program-card__list">
               <li>Разбор ошибок и слабых мест</li>
               <li>Чистота, скорость и качество работы</li>
-              <li>Рост уверенности в каждом движении</li>
+              <li>Комбинированный формат ± LED — 18 000 ₽</li>
             </ul>
             <div class="program-card__actions">
               <a class="button button--ghost button--small" href="/povyshenie-kvalifikatsii">Подробнее о программке</a>
@@ -473,11 +520,15 @@
               <span class="program-card__duration">авторские материалы</span>
             </div>
             <h3>Онлайн-продукты / авторские пособия</h3>
+            <div class="program-card__price">
+              <strong>от 499 ₽</strong>
+              <span>Онлайн-продукты и материалы до 8 000 ₽</span>
+            </div>
             <p>Для тех, кому удобнее учиться в своем темпе и держать под рукой понятные материалы для повторения и практики.</p>
             <ul class="program-card__list">
-              <li>Авторские пособия и схемы</li>
-              <li>Удобный онлайн-формат</li>
-              <li>Опора для самостоятельной работы</li>
+              <li>Практикум онлайн — 6 000 ₽</li>
+              <li>Пособие по базовому курсу + уроки — 8 000 ₽</li>
+              <li>Гайды и тематические каналы — от 499 ₽</li>
             </ul>
             <div class="program-card__actions">
               <a class="button button--ghost button--small" href="/avtorskie-gaydy">Подробнее о программке</a>
@@ -491,17 +542,56 @@
               <span class="program-card__duration">актуальное направление</span>
             </div>
             <h3>LED-наращивание</h3>
+            <div class="program-card__price">
+              <strong>12 000 ₽</strong>
+              <span>С отработкой на модели</span>
+            </div>
             <p>Для тех, кто хочет расширить спектр услуг, освоить современную LED-технику и добавить в работу актуальное направление.</p>
             <ul class="program-card__list">
               <li>Знакомство с LED-системой и материалами</li>
               <li>Практика и понимание техники работы</li>
-              <li>Новый востребованный формат в услугах</li>
+              <li>Комбинированный формат ± Практикум — 18 000 ₽</li>
             </ul>
             <div class="program-card__actions">
                <a class="button button--ghost button--small" href="/led-narashchivanie">Подробнее о программке</a>
               <a class="program-card__link" href="#contacts">Оставить заявку</a>
             </div>
           </article>
+        </div>
+      </section>
+
+      <section class="section format-guide" aria-labelledby="format-guide-title">
+        <div class="section__intro section__intro--wide" data-reveal="fade-left">
+          <p class="eyebrow">Навигация по программам</p>
+          <h2 id="format-guide-title">Какой формат <span class="heading-accent">выбрать именно вам</span>?</h2>
+          <p>Коротко собрали, какой вариант лучше подходит под ваш опыт, задачу и формат обучения.</p>
+        </div>
+
+        <div class="format-guide__grid">
+          <a class="format-guide__item" href="/bazovyy-kurs" data-reveal="fade-up">
+            <span class="format-guide__tag">С нуля</span>
+            <h3>Базовый курс</h3>
+            <p>Если нужен спокойный старт в профессии, постановка руки и практика на моделях.</p>
+            <strong>20 000 ₽</strong>
+          </a>
+          <a class="format-guide__item" href="/povyshenie-kvalifikatsii" data-reveal="fade-up">
+            <span class="format-guide__tag">Для мастеров</span>
+            <h3>Практикум</h3>
+            <p>Если уже работаете и хотите убрать ошибки, ускориться и повысить качество результата.</p>
+            <strong>12 000 ₽</strong>
+          </a>
+          <a class="format-guide__item" href="/led-narashchivanie" data-reveal="fade-up">
+            <span class="format-guide__tag">Новая услуга</span>
+            <h3>LED-наращивание</h3>
+            <p>Если хотите освоить современную технологию и расширить список услуг для клиентов.</p>
+            <strong>12 000 ₽</strong>
+          </a>
+          <a class="format-guide__item" href="/avtorskie-gaydy" data-reveal="fade-up">
+            <span class="format-guide__tag">Онлайн</span>
+            <h3>Гайды и материалы</h3>
+            <p>Если удобнее учиться дистанционно, возвращаться к схемам и усиливать практику в своем темпе.</p>
+            <strong>от 499 ₽</strong>
+          </a>
         </div>
       </section>
 
@@ -519,7 +609,7 @@
             </div>
             <div class="review-card__body">
               <h3>«Стало понятно и спокойно»</h3>
-              <p>Отмечают понятную подачу и то, что практика помогает быстро почувствовать уверенность.</p>
+              <p>После базового курса ученицам проще понять логику работы и спокойнее выйти к первым моделям и клиентам.</p>
               <span class="review-card__meta">Базовый курс</span>
             </div>
           </article>
@@ -530,8 +620,8 @@
             </div>
             <div class="review-card__body">
               <h3>«Практики было достаточно»</h3>
-              <p>Ключевой запрос — больше практики на моделях, и здесь он закрывается.</p>
-              <span class="review-card__meta">Практика</span>
+              <p>Один из самых частых запросов — больше практики на моделях, и этот формат как раз закрывает его без перегруза лишней теорией.</p>
+              <span class="review-card__meta">Практика на моделях</span>
             </div>
           </article>
           <article class="review-card review-card--trio" data-reveal="fade-up">
@@ -541,8 +631,8 @@
             </div>
             <div class="review-card__body">
               <h3>«Уверенно работаю с клиентами»</h3>
-              <p>Отмечают рост качества и уверенность в технике после обучения.</p>
-              <span class="review-card__meta">Повышение</span>
+              <p>После повышения квалификации мастера чаще отмечают более чистую технику, уверенность в работе и стабильный результат на клиентах.</p>
+              <span class="review-card__meta">Повышение квалификации</span>
             </div>
           </article>
         </div>
@@ -728,12 +818,32 @@
               <p>Да, есть отдельный формат с онлайн-продуктами, гайдами, схемами и материалами без полного курса.</p>
             </div>
           </article>
+
+          <article class="faq-item">
+            <button class="faq-item__button" type="button" aria-expanded="false">
+              <span>Сколько стоит обучение наращиванию ресниц в Симферополе?</span>
+              <span class="faq-item__icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-item__content">
+              <p>Базовый курс — 20 000 ₽, практикум «Работа над ошибками» — 12 000 ₽, LED-наращивание — 12 000 ₽. Онлайн-продукты — от 499 ₽ до 8 000 ₽.</p>
+            </div>
+          </article>
+
+          <article class="faq-item">
+            <button class="faq-item__button" type="button" aria-expanded="false">
+              <span>Какой формат обучения выбрать: базовый курс, практикум, LED или онлайн-материалы?</span>
+              <span class="faq-item__icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-item__content">
+              <p>Если вы начинаете с нуля — выбирайте базовый курс. Если уже работаете и хотите усилить технику — подойдет практикум «Работа над ошибками». Если хотите добавить современную услугу — LED-наращивание. Если удобнее учиться дистанционно — подойдут онлайн-продукты и авторские пособия.</p>
+            </div>
+          </article>
         </div>
       </section>
 
       <section class="section seo-copy" aria-label="Дополнительная информация о курсах">
         <div class="seo-copy__card" data-reveal="fade-up">
-          <p>Курсы по наращиванию ресниц в Симферополе подойдут новичкам, которые хотят спокойно войти в профессию и выйти к первым клиентам с понятной базой и практикой. Для действующих мастеров здесь есть программы, которые помогают усилить технику, расширить список услуг и расти в доходе.</p>
+          <p>Курсы по наращиванию ресниц в Симферополе подойдут новичкам, которые хотят спокойно войти в профессию и выйти к первым клиентам с понятной базой и практикой. Для действующих мастеров здесь есть программы, которые помогают усилить технику, расширить список услуг и расти в доходе: <a href="/bazovyy-kurs">базовый курс</a>, <a href="/povyshenie-kvalifikatsii">практикум «Работа над ошибками»</a>, <a href="/led-narashchivanie">LED-наращивание</a> и <a href="/avtorskie-gaydy">онлайн-материалы</a>.</p>
         </div>
       </section>
 
@@ -832,7 +942,7 @@
     <footer class="site-footer">
       <a class="site-footer__logo" href="#top" aria-label="Перейти к началу страницы">
         <span class="site-footer__logo-wrap" aria-hidden="true">
-          <img class="site-footer__logo-image" src="logo-ag.webp" alt="" loading="lazy" decoding="async">
+          <img class="site-footer__logo-image" src="logo-ag-mentor.svg" alt="" loading="lazy" decoding="async">
         </span>
         <span class="site-footer__city">Симферополь • обучение наращиванию ресниц</span>
       </a>
@@ -844,6 +954,12 @@
         <a href="/led-narashchivanie">LED-наращивание</a>
         <a href="#contacts">Контакты</a>
       </nav>
+
+      <div class="site-footer__legal" aria-label="Реквизиты и условия">
+        <p class="site-footer__legal-line"><strong>ИП ГРИШИНА АННА АНДРЕЕВНА</strong></p>
+        <p class="site-footer__legal-line">ИНН 910408259522</p>
+        <p class="site-footer__legal-note">Информация на сайте носит информационный характер и не является публичной офертой. Стоимость, формат обучения и условия записи уточняйте при обращении.</p>
+      </div>
     </footer>
 
     <div class="social-widget" aria-label="Социальные сети студии">
@@ -867,6 +983,8 @@
   <script src="script.js" defer></script>
 </body>
 </html>
+
+
 
 
 

@@ -1,0 +1,26 @@
+<svg width="1200" height="450" viewBox="0 0 1200 450" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <title>Анна Гришина — ресничный наставник</title>
+  <g fill="#CA8A84">
+    <text x="600" y="118" text-anchor="middle" font-family="Times New Roman, Georgia, serif" font-size="154" letter-spacing="4">AG</text>
+    <text x="600" y="344" text-anchor="middle" font-family="Times New Roman, Georgia, serif" font-size="92" letter-spacing="4">АННА ГРИШИНА</text>
+    <text x="600" y="436" text-anchor="middle" font-family="Times New Roman, Georgia, serif" font-size="40" letter-spacing="16">РЕСНИЧНЫЙ НАСТАВНИК</text>
+  </g>
+  <g stroke="#CA8A84" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M395 150C448 212 720 216 805 155" stroke-width="4"/>
+    <path d="M445 168C509 210 657 216 744 193" stroke-width="3"/>
+    <path d="M478 179L462 201" stroke-width="3"/>
+    <path d="M494 184L483 212" stroke-width="3"/>
+    <path d="M511 189L503 220" stroke-width="3"/>
+    <path d="M528 194L522 228" stroke-width="3"/>
+    <path d="M545 198L542 233" stroke-width="3"/>
+    <path d="M562 202L562 238" stroke-width="3"/>
+    <path d="M579 205L582 240" stroke-width="3"/>
+    <path d="M596 207L602 240" stroke-width="3"/>
+    <path d="M613 208L622 239" stroke-width="3"/>
+    <path d="M630 208L642 237" stroke-width="3"/>
+    <path d="M647 206L662 232" stroke-width="3"/>
+    <path d="M664 203L681 226" stroke-width="3"/>
+    <path d="M681 198L700 218" stroke-width="3"/>
+    <path d="M697 192L719 208" stroke-width="3"/>
+  </g>
+</svg>

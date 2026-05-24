@@ -1,0 +1,97 @@
+# robots.txt — anna-lashtrener.ru
+# Разрешаем основным поисковикам и AI-ботам индексировать сайт,
+# запрещаем служебные страницы.
+
+# Yandex — главный поисковик в РФ
+User-agent: Yandex
+Allow: /
+Disallow: /politiki
+
+User-agent: YandexBot
+Allow: /
+Disallow: /politiki
+
+User-agent: YandexImages
+Allow: /
+
+# Google
+User-agent: Googlebot
+Allow: /
+Disallow: /politiki
+
+User-agent: Googlebot-Image
+Allow: /
+
+# Bing / Mail.ru / DuckDuckGo
+User-agent: Bingbot
+Allow: /
+Disallow: /politiki
+
+User-agent: Mail.RU_Bot
+Allow: /
+Disallow: /politiki
+
+User-agent: DuckDuckBot
+Allow: /
+
+# AI-боты — разрешаем, чтобы школа попадала в ответы LLM-поиска
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: YandexGPT
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Шумные краулеры — закрываем
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+# По умолчанию — разрешаем всем остальным, но без служебных страниц
+User-agent: *
+Allow: /
+Disallow: /politiki
+Disallow: /rabota-nad-oshibkami
+
+Sitemap: https://anna-lashtrener.ru/sitemap.xml
+Host: anna-lashtrener.ru

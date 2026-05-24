@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://anna-lashtrener.ru/</loc>
+    <lastmod>2026-05-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://anna-lashtrener.ru/hero-main-blonde.webp</image:loc>
+      <image:title>Курсы наращивания ресниц в Симферополе — школа Анны Гришиной</image:title>
+      <image:caption>Обучение наращиванию ресниц с нуля в Симферополе и Крыму</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://anna-lashtrener.ru/teacher-anna.webp</image:loc>
+      <image:title>Анна Гришина — тренер по наращиванию ресниц</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://anna-lashtrener.ru/bazovyy-kurs</loc>
+    <lastmod>2026-05-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+    <image:image>
+      <image:loc>https://anna-lashtrener.ru/results-first-practice.webp</image:loc>
+      <image:title>Базовый курс наращивания ресниц в Симферополе с нуля</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://anna-lashtrener.ru/base-course-photo-01.webp</image:loc>
+      <image:title>Практика на базовом курсе наращивания ресниц</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://anna-lashtrener.ru/povyshenie-kvalifikatsii</loc>
+    <lastmod>2026-05-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://anna-lashtrener.ru/results-after-upgrade.webp</image:loc>
+      <image:title>Повышение квалификации лэшмейкера в Симферополе</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://anna-lashtrener.ru/led-narashchivanie</loc>
+    <lastmod>2026-05-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://anna-lashtrener.ru/led-hero.webp</image:loc>
+      <image:title>Курс LED-наращивания ресниц в Симферополе</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://anna-lashtrener.ru/led-detail-lamp.webp</image:loc>
+      <image:title>LED-лампа для наращивания ресниц</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://anna-lashtrener.ru/avtorskie-gaydy</loc>
+    <lastmod>2026-05-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://anna-lashtrener.ru/program-notebook.webp</image:loc>
+      <image:title>Авторские гайды по наращиванию ресниц</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://anna-lashtrener.ru/o-trenere</loc>
+    <lastmod>2026-05-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://anna-lashtrener.ru/teacher-anna.webp</image:loc>
+      <image:title>Анна Гришина — тренер по наращиванию ресниц с 15-летним опытом</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://anna-lashtrener.ru/otzyvy</loc>
+    <lastmod>2026-05-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://anna-lashtrener.ru/review-cert-trio.webp</image:loc>
+      <image:title>Выпускницы школы Анны Гришиной с сертификатами</image:title>
+    </image:image>
+  </url>
+</urlset>
